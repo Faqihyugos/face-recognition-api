@@ -23,3 +23,14 @@ import Route from '@ioc:Adonis/Core/Route'
 Route.get('/', async () => {
   return { hello: 'world' }
 })
+
+Route.group(() => {
+    Route.get('/',async () => {
+      return { message: 'Welcome, API RUNNING'}
+    })
+    Route.group(() => {
+      Route.post('/', 'FacesController.store')
+      Route.put('/', 'FacesController.update')
+      Route.put('/comparison', 'FacesController.comparison')
+    }).prefix('/face')
+}).prefix('/api')
